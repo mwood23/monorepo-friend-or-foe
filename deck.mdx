@@ -1,0 +1,160 @@
+import {
+  Invert,
+  Split,
+  SplitRight,
+  Horizontal,
+  FullScreenCode
+} from "mdx-deck";
+
+# Monorepos: Friend or Foe
+
+A guide to using monorepos in JavaScript applications.
+
+---
+
+<Split>
+
+![](https://source.unsplash.com/random/768x2048?brooklyn)
+
+## About me
+
+- JavaScript developer for the past 5 years
+- Runs a small product shop called Caldera
+- Launched apps: Guess the Throne, It's a Date, Alcamine
+- Outdoors
+- Current Stack: React, Node, Apollo Graphql, Typescript, Styled Components
+
+</Split>
+
+---
+
+## What are monorepos?
+
+Monorepos are a way to bring together a collection of code repositories into a centralized repository to encourage code reusability.
+
+---
+
+## Who uses them?
+
+- Google and Twitter
+- Create react app
+
+---
+
+## Why Monorepos?
+
+- Atomic commits
+- Code reuse
+- Approachable projects
+- Single source of truth for configs
+- Semantic Versioning
+- Application performance
+- Onboarding
+- Development velocity
+
+---
+
+## Why Not Monorepos?
+
+- Initimidating
+- Continuous Integration Woes
+- Bootstrapping
+- Development velocity
+
+---
+
+## What's the alternative?
+
+Diagram showing three repos symlinked together locally for development and explain the pitfalls we ran into.
+
+---
+
+## Yarn
+
+Yarn is an alternative package manager to NPM that has support for workspaces. Workspaces enable you to hoist dependencies to a root `node_modules` folder and works great for monorepos.
+
+---
+
+## Lerna
+
+Lerna is a library that makes running commands in easy.
+
+---
+
+## Goals
+
+- Bootstrap a monorepo
+- Create a client and server
+- Create a shared module between client and server
+- Create a common package
+- Publish packages
+- Generate changelogs
+- Nice development environment
+
+---
+
+## Setting up a package
+
+- Needs to be a consistent structure
+- All NPM scripts must be the same
+
+---
+
+1. Have a repo already setup
+2. Walk through package.json
+3. Create a client project
+4. Create a server project
+5. Create a shared project
+6. Write lerna commands 
+7. Run it!
+8. Write code that needs to be shared on the server and client (form validation yup schema)
+9. Woohoo!
+10. Create a shared package component
+11. Plop in a rollup config
+12. Explain and setup commitizen and cz lerna changelog
+13. Commit the code
+14. Run lerna changed
+15. Publish the code to NPM
+16. Check out the changelogs and versions 
+
+
+---
+
+## Cool advantages of publishing everything
+
+- Changelogs are autogeneated
+- Packages are versioned making projects able to incrementally adopt breaking changes
+- Clients can be installed as a dep to the server and rolled back/pinned if necessary
+
+--- 
+
+## Gotchas
+
+- Consistent `package.json` files
+- Consistent dev commands
+- Not rebootstrapping when merging in breaking changes
+- Incorrect commits can cause bad feature bumps
+- Versions out of sync in packages causes autobumps to not happen
+- Adding in testing frameworks can be a challenge
+- Some packages won't work in a hoisted environment, use `nohoist` option
+
+---
+
+## Is it worth it?
+
+If you are building a suite of tools that share code monorepos are a **must** long as the development team is bought in.
+
+Conversions are possible, but be aware of downstream impacts in CI, Docker, and testing libs.
+
+---
+
+### Resources
+
+- Caldera monorepo
+<!-- Link to some articles -->
+
+---
+
+# Thank You!
+
+

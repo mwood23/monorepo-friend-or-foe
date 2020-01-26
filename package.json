@@ -1,0 +1,19 @@
+{
+  "name": "monorepo-friend-or-foe",
+  "version": "0.1.0",
+  "description": "Slides for talk on monorepos.",
+  "main": "index.js",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.js",
+    "help": "mdx-deck"
+  },
+  "resolutions": {
+    "mdx-deck/**/gatsby": "2.18.4"
+  },
+  "devDependencies": {
+    "mdx-deck": "^3.0.13"
+  }
+}
