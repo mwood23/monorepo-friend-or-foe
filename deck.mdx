@@ -3,81 +3,152 @@ import {
   Split,
   SplitRight,
   Horizontal,
-  FullScreenCode
+  FullScreenCode,
+  Appear
 } from "mdx-deck";
+import { CodeSurfer, CodeSurferColumns, Step } from "code-surfer"
+import { nightOwl } from "@code-surfer/themes"
+import Layout from './components/Layout'
+
+export const theme = nightOwl
 
 # Monorepos: Friend or Foe
 
 A guide to using monorepos in JavaScript applications.
 
----
+--- 
 
 <Split>
 
-![](https://source.unsplash.com/random/768x2048?brooklyn)
+![picture of Marcus](https://res.cloudinary.com/alcamine/image/upload/q_auto:good/v1580098469/marcus_wewizn.jpg)
 
 ## About me
 
-- JavaScript developer for the past 5 years
-- Runs a small product shop called Caldera
-- Launched apps: Guess the Throne, It's a Date, Alcamine
-- Outdoors
-- Current Stack: React, Node, Apollo Graphql, Typescript, Styled Components
+<ul style={{ textAlign: 'left', marginLeft: '50px', paddingLeft: '15px'}}>
+  <li>JavaScript developer for the past 5 years</li>
+  <li>Runs <a href="https://www.calderadigital.com/" target="_blank" rel="nofollow noreferrer">Caldera</a>, a small product company</li>
+  <li>Launched apps: <a href="https://alcamine.com/" target="_blank" rel="nofollow noreferrer">Alcamine</a>, <a href="https://guessthethrone.com/" target="_blank" rel="nofollow noreferrer">Guess the Throne</a>, <a href="https://www.itsadate.app/" target="_blank" rel="nofollow noreferrer">It's a Date</a></li>
+  <li>Current Stack: React, Node, Apollo Graphql, Typescript, Styled Components</li>
+</ul>
 
 </Split>
 
 ---
 
+<Layout>
+
 ## What are monorepos?
 
 Monorepos are a way to bring together a collection of code repositories into a centralized repository to encourage code reusability.
+
+</Layout>
 
 ---
 
 ## Who uses them?
 
-- Google and Twitter
-- Create react app
+<Appear>
+
+- Google, Facebook, Twitter, Uber, etc.
+
+### What about Lerna specific repos?
+
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [jest](https://github.com/facebook/jest)
+- [GatsbyJS](https://github.com/gatsbyjs/gatsby)
+- [Apollo](https://github.com/apollographql/apollo-server)
+- [next.js](https://github.com/zeit/next.js)
+- and many others
+
+</Appear>
 
 ---
 
 ## Why Monorepos?
 
-- Atomic commits
-- Code reuse
-- Approachable projects
-- Single source of truth for configs
-- Semantic Versioning
-- Application performance
-- Onboarding
-- Development velocity
+
+<ul style={{textAlign: 'left'}}>
+
+<Appear>
+
+<li>Code reuse</li>
+<li>Atomic commits</li>
+<li>Semantic Versioning</li>
+<li>Single source of truth for configs</li>
+<li>Approachable projects</li>
+<li>Onboarding</li>
+<li>Development velocity</li>
+  
+</Appear>
+
+</ul>
 
 ---
+
 
 ## Why Not Monorepos?
 
-- Initimidating
-- Continuous Integration Woes
-- Bootstrapping
-- Development velocity
+
+<ul style={{ textAlign: 'left' }}>
+
+<Appear>
+
+<li>Intimidating</li>
+<li>Continuous Integration Woes</li>
+<li>Bootstrapping</li>
+<li>Development velocity</li>
+  
+</Appear>
+
+</ul>
 
 ---
 
-## What's the alternative?
-
-Diagram showing three repos symlinked together locally for development and explain the pitfalls we ran into.
+![monorepo life](https://pbs.twimg.com/media/B4XcYicCIAA5SLl?format=png)
+<span style={{fontSize: '1rem', marginTop: '20px'}}>Credit: <a href="https://twitter.com/monorepi/status/542081644954259457?lang=en" target="_blank" rel="nofollow noreferrer">@monorepi
+</a></span>
 
 ---
+
+## Traditional Repository Structure 
+
+![traditional repository architecture](https://res.cloudinary.com/alcamine/image/upload/v1580102464/notMonorepo_istbor.jpg)
+
+---
+
+## Monorepo Structure
+
+![monorepo repository architecture](https://res.cloudinary.com/alcamine/image/upload/v1580102765/monorepo_1_bsqee5.jpg)
+
+---
+
+<Layout>
+
+## That Looks More Complicated
+
+![mind blown](https://media.giphy.com/media/1L5YuA6wpKkNO/giphy.gif)
+
+<Appear>
+
+The convenience comes at the cost of complexity. Lucky for us, Yarn and Lerna handle all of the orchestration and management long as you configure it right!
+
+</Appear>
+
+</Layout>
+
+---
+
+<Layout>
 
 ## Yarn
 
 Yarn is an alternative package manager to NPM that has support for workspaces. Workspaces enable you to hoist dependencies to a root `node_modules` folder and works great for monorepos.
 
----
-
 ## Lerna
 
 Lerna is a library that makes running commands in easy.
+
+</Layout>
 
 ---
 
@@ -93,30 +164,1044 @@ Lerna is a library that makes running commands in easy.
 
 ---
 
-## Setting up a package
+<CodeSurfer>
 
-- Needs to be a consistent structure
-- All NPM scripts must be the same
+```bash
+mkdir monorepo-starter
+```
+
+```bash 2
+mkdir monorepo-starter
+cd monorepo-starter
+```
+
+```bash 3
+mkdir monorepo-starter
+cd monorepo-starter
+yarn init
+```
+
+```bash 4
+mkdir monorepo-starter
+cd monorepo-starter
+yarn init
+git init
+```
+
+</CodeSurfer>
 
 ---
 
-1. Have a repo already setup
-2. Walk through package.json
-3. Create a client project
-4. Create a server project
-5. Create a shared project
-6. Write lerna commands 
-7. Run it!
-8. Write code that needs to be shared on the server and client (form validation yup schema)
-9. Woohoo!
-10. Create a shared package component
-11. Plop in a rollup config
-12. Explain and setup commitizen and cz lerna changelog
-13. Commit the code
-14. Run lerna changed
-15. Publish the code to NPM
-16. Check out the changelogs and versions 
+<CodeSurferColumns>
 
+<Step>
+
+```bash title="Project Directory"
+.
+└── package.json
+```
+
+```js
+
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Needed for publishing packages."
+.
+├── LICENSE
+└── package.json
+```
+
+```js
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Where packages and projects will be housed."
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```js
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json title="Root package.json"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json title="Root package.json" subtitle="We don't publish the root package.json"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT"
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json title="Root package.json" subtitle="Let yarn know where to find deps to be linked."
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "main": "index.js",
+  "license": "MIT"
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json 9 title="Root package.json" subtitle="The root repo has no entry point."
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "main": "index.js",
+  "license": "MIT"
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json title="Root package.json" subtitle="The root repo has no entry point."
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT"
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+└── package.json
+```
+
+```json title="Root package.json" subtitle="Dev deps live at the root."
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "devDependencies": {}
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="Root package.json" subtitle="Add lerna and associated scripts."
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Create lerna.json"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="lerna.json" subtitle="Plop in this config"
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Create lerna.json"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 2 title="lerna.json" subtitle="Can be one version for all packages or independent to let each package handle versioning."
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Create lerna.json"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 3:4 title="lerna.json" subtitle="Needs to be yarn because we're using workspaces."
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Create lerna.json"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 5:11 title="lerna.json" subtitle="Customize config for each lerna CLI command."
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Create lerna.json"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 12:18 title="lerna.json" subtitle="Globs to ignore file changes that Lerna doesn't need to worry about when publishing."
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<Layout>
+
+## Halfway there!
+
+![done](https://media.giphy.com/media/Mp4hQy51LjY6A/giphy.gif)
+
+<Appear>
+
+That gets you to a monorepo, but it doesn't have any packages or handle releases for you. Let's do that now!
+
+</Appear>
+
+</Layout>
+
+
+---
+
+## Handling Versioning
+
+---
+
+<Layout>
+
+## [Conventional Commits](https://conventionalcommits.org/)
+
+A specification for adding human and machine meaning to commit messages. Lerna will interpret our commit messages to determine which bumps to apply to packages.
+
+## [Commitizen](http://commitizen.github.io/cz-cli/)
+
+A CLI that enforces commit conventions for teams.
+
+## [Commitlint](https://commitlint.js.org/#/)
+
+Linting library that enforces a specific commit convention.
+
+</Layout>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json" subtitle="yarn add -DW @commitlint/cli @commitlint/config-conventional commitizen cz-lerna-changelog husky"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json" subtitle="Initialize the commitlint configuration"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json" subtitle="This adds your packages to the commitizen config so you can select the impacted files"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json" subtitle="Add in a nice aliases so committing is easy"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 6 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="package.json" subtitle="Turn on commitline to be ran on commit messages"
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="lerna.json"
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json title="lerna.json" subtitle="Turn on conventional commits to tell Lerna to bump packages based on commit messages."
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "noCommitHooks": true,
+      "allowBranch": "master",
+      "registry": "http://localhost:4873"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/*fixture.js",
+    "**/*.md"
+  ]
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory" subtitle="Add a gitignore file"
+.
+├── /packages
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```bash title="lerna.json" subtitle="Ignore node_modules for root directory and all packages"
+# dependencies
+**/node_modules
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```bash title="lerna.json" subtitle="Ignore any built files from packages"
+# dependencies
+**/node_modules
+
+# production
+packages/*/dist
+projects/*/dist
+
+packages/*/build
+projects/*/build
+```
+
+</Step>
+
+<Step>
+
+```bash 4 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+``` title="lerna.json" subtitle="Other random files to ignore"
+# dependencies
+**/node_modules
+
+# production
+packages/*/dist
+projects/*/dist
+
+packages/*/build
+projects/*/build
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# gatsby files
+.cache/
+
+# Yarn
+yarn-error.log
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity
+
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurfer>
+
+```bash
+git add -A
+```
+
+```bash 2
+git add -A
+git commit -m "initial commit"
+```
+
+```bash
+git add -A
+git commit -m "initial commit"
+
+husky > commit-msg (node v10.15.3)
+⧗   input: second commit
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+
+✖   found 2 problems, 0 warnings
+```
+
+```bash
+git add -A
+git commit -m "initial commit"
+
+husky > commit-msg (node v10.15.3)
+⧗   input: second commit
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+
+✖   found 2 problems, 0 warnings
+
+🙅‍♂️Commitlint didn't like our commit!
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurfer>
+
+```bash
+yarn commit
+```
+
+</CodeSurfer>
+
+---
+
+## Commitizen
+
+![commitlint in action](https://res.cloudinary.com/alcamine/image/upload/v1580105637/2020-01-27_01-12-26_2_ecf8au.gif)
+
+---
+
+## Woo!
+
+![party time](https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif)
+
+---
+
+<Layout>
+
+## Where we are so far
+
+The monorepo is set up with Lerna and Yarn and we conventional commits in with Lerna reading them to handle releasing our packages. Now it's time to add packages!
+
+</Layout>
+
+---
+
+<Layout>
+
+## Packages and Projects
+
+Every package or project in a monorepo needs a `package.json` file. They all need to be of a consistent structure so that Lerna can run commands in them and handle versioning.
+
+</Layout>
+
+---
+
+<Layout>
+
+## Linking Packages Together
+
+Code reuse is the biggest benefit of a monorepo. We are letting yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
+
+> Note: Packages and projects are handled the exact same in the monorepo. They're separated out by folder to make it easier to reason about.
+
+</Layout>
+
+---
+
+<Layout>
+
+## How this will work
+
+Lerna does a lot more than handle versioning and publishing for us. It also runs commands per package using a package graph under the hood. That means we can create commands from the root package.json that are ran in filtered packages.
+
+Ideally, we never have to navigate to a internal package's `package.json`.
+
+</Layout>
+
+---
 
 ---
 
