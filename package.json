@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "mdx-deck deck.mdx",
-    "build": "mdx-deck build deck.js",
+    "build": "mdx-deck build deck.mdx",
     "help": "mdx-deck"
   },
   "resolutions": {
