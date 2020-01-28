@@ -252,7 +252,7 @@ git init
   "name": "monorepo-starter",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
 }
 ```
 
@@ -274,7 +274,7 @@ git init
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
 }
 ```
 
@@ -300,7 +300,7 @@ git init
     "projects/*"
   ],
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
 }
 ```
 
@@ -326,7 +326,7 @@ git init
     "projects/*"
   ],
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
 }
 ```
 
@@ -351,7 +351,7 @@ git init
     "packages/*",
     "projects/*"
   ],
-  "license": "MIT"
+  "license": "MIT",
 }
 ```
 
@@ -377,7 +377,9 @@ git init
     "projects/*"
   ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+
+  }
 }
 ```
 
@@ -427,7 +429,7 @@ git init
 └── yarn.lock
 ```
 
-```json title="lerna.json" subtitle="Plop in this config"
+```json title="lerna.json" subtitle="Plop in this config."
 {
   "version": "independent",
   "npmClient": "yarn",
@@ -453,7 +455,7 @@ git init
 
 <Step>
 
-```bash 4 title="Project Directory" subtitle="Create lerna.json"
+```bash 4 title="Project Directory"
 .
 ├── /packages
 ├── /projects
@@ -489,7 +491,7 @@ git init
 
 <Step>
 
-```bash 4 title="Project Directory" subtitle="Create lerna.json"
+```bash 4 title="Project Directory"
 .
 ├── /packages
 ├── /projects
@@ -525,7 +527,7 @@ git init
 
 <Step>
 
-```bash 4 title="Project Directory" subtitle="Create lerna.json"
+```bash 4 title="Project Directory"
 .
 ├── /packages
 ├── /projects
@@ -561,7 +563,7 @@ git init
 
 <Step>
 
-```bash 4 title="Project Directory" subtitle="Create lerna.json"
+```bash 4 title="Project Directory"
 .
 ├── /packages
 ├── /projects
@@ -601,13 +603,13 @@ git init
 
 <Layout>
 
-## Halfway there!
+## Looking good!
 
 ![done](https://media.giphy.com/media/Mp4hQy51LjY6A/giphy.gif)
 
 <Appear>
 
-That gets you to a monorepo, but it doesn't have any packages or handle releases for you. Let's do that now!
+That gets you to a monorepo, but it doesn't handle releases or contain packages. Let's do that now!
 
 </Appear>
 
@@ -667,7 +669,7 @@ Linting library that enforces a specific commit convention.
   },
   "devDependencies": {
     "lerna": "^3.20.2"
-  }
+  },
 }
 ```
 
@@ -705,7 +707,7 @@ Linting library that enforces a specific commit convention.
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
     "lerna": "^3.20.2"
-  }
+  },
 }
 ```
 
@@ -723,7 +725,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```json title="package.json" subtitle="Initialize the commitlint configuration"
+```json title="package.json" subtitle="Initialize the commitlint configuration."
 {
   "name": "monorepo-starter",
   "version": "1.0.0",
@@ -748,7 +750,7 @@ Linting library that enforces a specific commit convention.
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
     "lerna": "^3.20.2"
-  }
+  },
 }
 ```
 
@@ -766,7 +768,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```json title="package.json" subtitle="This adds your packages to the commitizen config so you can select the impacted files"
+```json title="package.json" subtitle="This adds your packages to the commitizen config so you can select the impacted files."
 {
   "name": "monorepo-starter",
   "version": "1.0.0",
@@ -796,7 +798,7 @@ Linting library that enforces a specific commit convention.
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
     "lerna": "^3.20.2"
-  }
+  },
 }
 ```
 
@@ -814,7 +816,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```json title="package.json" subtitle="Add in a nice aliases so committing is easy"
+```json title="package.json" subtitle="Add in nice aliases so committing is easy."
 {
   "name": "monorepo-starter",
   "version": "1.0.0",
@@ -847,7 +849,7 @@ Linting library that enforces a specific commit convention.
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
     "lerna": "^3.20.2"
-  }
+  },
 }
 ```
 
@@ -865,7 +867,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```json title="package.json" subtitle="Turn on commitline to be ran on commit messages"
+```json title="package.json" subtitle="Turn on commitlint to be ran on commit messages"
 {
   "name": "monorepo-starter",
   "version": "1.0.0",
@@ -986,7 +988,7 @@ Linting library that enforces a specific commit convention.
 
 <Step>
 
-```bash 4 title="Project Directory" subtitle="Add a gitignore file"
+```bash 4 title="Project Directory" subtitle="Add a .gitignore file."
 .
 ├── /packages
 ├── /projects
@@ -997,7 +999,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```bash title="lerna.json" subtitle="Ignore node_modules for root directory and all packages"
+``` title="lerna.json" subtitle="Ignore node_modules for root directory and all packages."
 # dependencies
 **/node_modules
 ```
@@ -1017,7 +1019,7 @@ Linting library that enforces a specific commit convention.
 └── yarn.lock
 ```
 
-```bash title="lerna.json" subtitle="Ignore any built files from packages"
+``` title="lerna.json" subtitle="Ignore any built files from packages."
 # dependencies
 **/node_modules
 
@@ -1044,7 +1046,7 @@ projects/*/build
 └── yarn.lock
 ```
 
-``` title="lerna.json" subtitle="Other random files to ignore"
+``` title="lerna.json" subtitle="Other random files to ignore."
 # dependencies
 **/node_modules
 
@@ -1163,7 +1165,7 @@ yarn commit
 
 ## Where we are so far
 
-The monorepo is set up with Lerna and Yarn and we conventional commits in with Lerna reading them to handle releasing our packages. Now it's time to add packages!
+The monorepo is set up with Lerna, Yarn, and conventional commits with Lerna interpreting them to handle releasing our packages. Now it's time to add packages!
 
 </Layout>
 
@@ -1181,15 +1183,11 @@ Every package or project in a monorepo needs a `package.json` file. They all nee
 
 ---
 
-![automated versioning meme](https://img.devrant.com/devrant/rant/r_562197_jDaWU.jpg)
-
----
-
 <Layout>
 
 ## Linking Packages Together
 
-Code reuse is the biggest benefit of a monorepo. We are letting yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
+Code reuse is the biggest benefit of a monorepo. We are letting Yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, Yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
 
 </Layout>
 
@@ -1207,11 +1205,15 @@ Ideally, we never have to navigate to a internal package's `package.json`.
 
 ---
 
+![automated versioning meme](https://img.devrant.com/devrant/rant/r_562197_jDaWU.jpg)
+
+---
+
 <Layout>
 
 ## Building Packages
 
-Every package we break out will be published a package registry somewhere. That means we'll need to Babel and Rollup/Webpack the packages. Those packages will also be packages!
+Every package we break out will be published to a package registry somewhere. That means we'll need to Babel and Rollup/Webpack the packages. Those packages will also be packages!
 
 Since this is on monorepos we'll be adding them but not walking through the code. If you have any questions open an issue on the [starter repo](https://github.com/mwood23/react-monorepo-starter/issues) or catch me after!
 
@@ -1224,8 +1226,6 @@ Since this is on monorepos we'll be adding them but not walking through the code
 <Layout>
 
 A [specification](https://semver.org/) that defines a set of rules for how to handle versioning code. Helps avoid "dependency hell."
-
-Given a version number MAJOR.MINOR.PATCH, increment the:
 
 1. MAJOR version when you make incompatible API changes,
 2. MINOR version when you add functionality in a backwards compatible manner, and
@@ -1243,13 +1243,15 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 <CodeSurfer>
 
 ```json title="A package's package.json"
-{}
+{
+
+}
 ```
 
 ```json title="A package's package.json" subtitle="Can start at any version, long as you're consistent. Normally either 0.1.0 or 1.0.0."
 {
   "name": "@monorepo-starter/<package-name>",
-  "version": "0.1.0"
+  "version": "1.0.0",
 }
 ```
 
@@ -1257,7 +1259,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
-  "description": "Description of the package"
+  "description": "Description of the package",
 }
 ```
 
@@ -1275,7 +1277,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
     "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
   },
   "license": "MIT",
-  "author": "Marcus Wood <marcus@calderadigital.com>"
+  "author": "Marcus Wood <marcus@calderadigital.com>",
 }
 ```
 
@@ -1314,11 +1316,11 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
   "main": "dist/index.js",
-  "module": "dist/index.module.js"
+  "module": "dist/index.module.js",
 }
 ```
 
-```json title="A package's package.json" subtitle="Scripts are super important! They need to be consistent across packages for Lerna to do task running for us. This is a normal config for most packages. Project will vary based on the framework and build steps."
+```json title="A package's package.json" subtitle="Scripts are super important! They need to be consistent across packages for Lerna to do task running. This is a normal config for most packages. Projects will vary based on the framework and build steps."
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
@@ -1333,6 +1335,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1344,11 +1347,11 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
     "lint": "eslint src/**/*.js",
     "lint:fix": "yarn lint --fix",
     "test": "echo 'N/A'"
-  }
+  },
 }
 ```
 
-```json title="A package's package.json" subtitle="Dev deps should mostly be optional unless it's a package inside of the monorepo you want to trigger package reloading or the package explicitly needs it. An example would be an ejected CSS lib that has special requirements to be in the same package directory."
+```json title="A package's package.json" subtitle="Dev deps should be empty unless it's a package inside of the monorepo you want to trigger package reloading or the package explicitly needs it. An example would be an ejected CSS lib that has special requirements to be in the same package directory."
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
@@ -1363,6 +1366,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1394,40 +1398,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
-  "module": "dist/index.module.js",
-  "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "clean": "run-p clean:*",
-    "clean:build": "rimraf dist",
-    "clean:node_modules": "rimraf node_modules",
-    "dev": "rollup -c rollup.config.js -w",
-    "preinstall": "npx use-yarn",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "yarn lint --fix",
-    "test": "echo 'N/A'"
-  },
-  "devDependencies": {},
-  "dependencies": {
-    "react-sparkle": "^1.0.5"
-  }
-}
-```
-
-```json title="A package's package.json" subtitle="A package that relies on React needs to have it listed as a peer dependency NOT a normal dependency because the project that requires this package will have it as a dependency. Lots of packages require only version of a library running at once. This causes weird bugs so be mindful!"
-{
-  "name": "@monorepo-starter/<package-name>",
-  "version": "1.0.0",
-  "description": "Description of the package",
-  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
-  "bugs": {
-    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
-  },
-  "license": "MIT",
-  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1444,14 +1415,10 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   "dependencies": {
     "react-sparkle": "^1.0.5"
   },
-  "peerDependencies": {
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
-  },
 }
 ```
 
-```json 32:33 title="A package's package.json" subtitle="Notice that we don't have the ^ prefixing the packages. For dependencies that we list as peers throughout the app we pin them and manually update all of them as needed. That prevents weird bugs and enforces consistent standards."
+```json title="A package's package.json" subtitle="A package that relies on React needs to have it listed as a peer dependency NOT a normal dependency because the project that requires this package will have it as a dependency. Lots of packages require only one version of a library running per application. This causes weird bugs so be mindful!"
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
@@ -1466,6 +1433,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1489,7 +1457,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 }
 ```
 
-```json 32:33 title="A package's package.json" subtitle="This pinning doesn't sacrifice flexibility on updating piecemeal in the future since each package will be published over and over. A base project would have to update all at once if the React version bumped which is a good thing to make sure nothing breaks."
+```json 33:34 title="A package's package.json" subtitle="Notice that we don't have the ^ prefixing the packages. For dependencies that we list as peers throughout the app we pin them and manually update as needed. This prevents weird bugs and enforces consistent standards."
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
@@ -1504,6 +1472,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1527,7 +1496,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 }
 ```
 
-```json 32:33 title="A package's package.json" subtitle="You may need this config if you publish to NPM, use scoped packages, and want to post something open source."
+```json 33:34 title="A package's package.json" subtitle="This pinning doesn't sacrifice flexibility on updating piecemeal in the future since each package will be published over and over. A base project would have to update all at once if the React version bumped which is a good thing to make sure nothing breaks."
 {
   "name": "@monorepo-starter/<package-name>",
   "version": "1.0.0",
@@ -1542,6 +1511,46 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
   },
   "license": "MIT",
   "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+}
+```
+
+```json title="A package's package.json" subtitle="You may need this config if you publish to NPM, use scoped packages, and want to post something open source."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -1953,6 +1962,76 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 
 </Step>
 
+<Step>
+
+```bash 16 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Make sure to add React as well since we need it to be in node_modules to develop on /packages. This will likely be included by a project, but adding it here will take away an extraneous dependency warning."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
 </CodeSurferColumns>
 
 ---
@@ -2045,7 +2124,7 @@ Time to add a project!
 }
 ```
 
-```json title="A client projects's package.json" subtitle="Since this will be ran somewhere instead of ingested, your libs are dependencies NOT peer dependencies. They are also locked to be the same version as the peer deps listed."
+```json title="A client projects's package.json" subtitle="Since this will be ran somewhere instead of ingested, libraries are dependencies NOT peer dependencies. They are also locked to be the same version as the peer deps listed."
 {
   "name": "@monorepo-starter/fancy-app-client",
   "version": "1.0.0",
@@ -2955,7 +3034,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3037,7 +3118,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3120,7 +3203,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3204,7 +3289,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3292,7 +3379,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3381,7 +3470,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3473,7 +3564,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3566,7 +3659,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3662,7 +3757,9 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "husky": {
     "hooks": {
@@ -3741,10 +3838,10 @@ Conversions are possible, but be aware of downstream impacts in CI, Docker, and 
 
 <Layout>
 
-- [Rob Hilgefort](https://twitter.com/rjhilgefort) for helping me make this monorepo structure a reality.
+- [Rob Hilgefort](https://twitter.com/rjhilgefort) for helping me make this monorepo structure a reality
 - [Rodrigo Pombo](https://twitter.com/pomber) for the amazing CodeSurfer lib that made this deck
 - [Daniel Stockman](https://github.com/evocateur) for maintaining Lerna
-- All of the open sourced monorepos [listed on Lerna's page](https://lerna.js.org/#users) to help us piece this thing together.
+- All of the open sourced monorepos [listed on Lerna's page](https://lerna.js.org/#users) to help us piece this thing together
 
 </Layout>
 
