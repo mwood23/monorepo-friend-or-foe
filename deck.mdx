@@ -146,7 +146,7 @@ Yarn is an alternative package manager to NPM that has support for workspaces. W
 
 ## Lerna
 
-Lerna is a library that makes running commands in easy.
+Lerna is a library used to manage monorepos.
 
 </Layout>
 
@@ -616,7 +616,7 @@ That gets you to a monorepo, but it doesn't have any packages or handle releases
 
 ---
 
-## Handling Versioning
+## Versioning
 
 ---
 
@@ -1175,7 +1175,13 @@ The monorepo is set up with Lerna and Yarn and we conventional commits in with L
 
 Every package or project in a monorepo needs a `package.json` file. They all need to be of a consistent structure so that Lerna can run commands in them and handle versioning.
 
+> Note: Packages and projects are handled the exact same in the monorepo. They're separated out by folder to make it easier to reason about.
+
 </Layout>
+
+---
+
+![automated versioning meme](https://img.devrant.com/devrant/rant/r_562197_jDaWU.jpg)
 
 ---
 
@@ -1184,8 +1190,6 @@ Every package or project in a monorepo needs a `package.json` file. They all nee
 ## Linking Packages Together
 
 Code reuse is the biggest benefit of a monorepo. We are letting yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
-
-> Note: Packages and projects are handled the exact same in the monorepo. They're separated out by folder to make it easier to reason about.
 
 </Layout>
 
@@ -1203,17 +1207,2511 @@ Ideally, we never have to navigate to a internal package's `package.json`.
 
 ---
 
+<Layout>
+
+## Building Packages
+
+Every package we break out will be published a package registry somewhere. That means we'll need to Babel and Rollup/Webpack the packages. Those packages will also be packages!
+
+Since this is on monorepos we'll be adding them but not walking through the code. If you have any questions open an issue on the [starter repo](https://github.com/mwood23/react-monorepo-starter/issues) or catch me after!
+
+</Layout>
+
 ---
 
-## Cool advantages of publishing everything
+## Semantic Versioning (SEMVER)
 
-- Changelogs are autogeneated
+<Layout>
+
+A [specification](https://semver.org/) that defines a set of rules for how to handle versioning code. Helps avoid "dependency hell."
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards compatible manner, and
+3. PATCH version when you make backwards compatible bug fixes.
+
+</Layout>
+
+---
+
+![semantic versioning speak it meme](http://m.quickmeme.com/img/3b/3bf54c64f746befd28698d58a1b31996ba22c14472b8aaf58775cb8e43ae9738.jpg)
+
+
+---
+
+<CodeSurfer>
+
+```json title="A package's package.json"
+{}
+```
+
+```json title="A package's package.json" subtitle="Can start at any version, long as you're consistent. Normally either 0.1.0 or 1.0.0."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "0.1.0"
+}
+```
+
+```json title="A package's package.json" subtitle="Description of the package"
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package"
+}
+```
+
+```json title="A package's package.json" subtitle="Shown on package registry's about section."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>"
+}
+```
+
+```json title="A package's package.json" subtitle="Entry point for the package."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
+}
+```
+
+```json title="A package's package.json" subtitle="Another entry point if there's a module based export. Bundlers like Rollup and Webpack will intelligently pick this one instead of main if it's given."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js"
+}
+```
+
+```json title="A package's package.json" subtitle="Scripts are super important! They need to be consistent across packages for Lerna to do task running for us. This is a normal config for most packages. Project will vary based on the framework and build steps."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  }
+}
+```
+
+```json title="A package's package.json" subtitle="Dev deps should mostly be optional unless it's a package inside of the monorepo you want to trigger package reloading or the package explicitly needs it. An example would be an ejected CSS lib that has special requirements to be in the same package directory."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+}
+```
+
+```json title="A package's package.json" subtitle="Treat deps like you normally would. Make sure to keep the versions of similar deps as close as you can across packages to avoid bundling multiple versions of the same dep."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  }
+}
+```
+
+```json title="A package's package.json" subtitle="A package that relies on React needs to have it listed as a peer dependency NOT a normal dependency because the project that requires this package will have it as a dependency. Lots of packages require only version of a library running at once. This causes weird bugs so be mindful!"
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+}
+```
+
+```json 32:33 title="A package's package.json" subtitle="Notice that we don't have the ^ prefixing the packages. For dependencies that we list as peers throughout the app we pin them and manually update all of them as needed. That prevents weird bugs and enforces consistent standards."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+}
+```
+
+```json 32:33 title="A package's package.json" subtitle="This pinning doesn't sacrifice flexibility on updating piecemeal in the future since each package will be published over and over. A base project would have to update all at once if the React version bumped which is a good thing to make sure nothing breaks."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+}
+```
+
+```json 32:33 title="A package's package.json" subtitle="You may need this config if you publish to NPM, use scoped packages, and want to post something open source."
+{
+  "name": "@monorepo-starter/<package-name>",
+  "version": "1.0.0",
+  "description": "Description of the package",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+```bash 2 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="We need to add a Babel Preset package that we'll use to transpile all our code."
+.
+├── /packages
+    └── /babel-preset
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="This package will be published like the rest of our packages so we pull it in here."
+.
+├── /packages
+    └── /babel-preset
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ {
+  "name": "@monorepo-starter/babel-preset",
+  "version": "1.0.0",
+  "description": "Babel preset used in @monorepo-starter",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "echo 'N/A'",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "echo 'N/A'",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "babel-plugin-inline-react-svg": "^1.1.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Package code goes in /src. We won't go through it here. Included in the starter repo at the rend of the deck."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="We also need a rollup config to bundle our packages for deployment to our package registry."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Lastly, we'll add a core package that will contain a collection of common UI components that aren't big enough for their own package."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+{
+  "name": "@monorepo-starter/core",
+  "version": "1.0.0",
+  "description": "Utility functions and small components to be shared across projects",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {
+    "@monorepo-starter/rollup-config": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "react-sparkle": "^1.0.5"
+  }
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 16 title="Project Directory" subtitle="Go back to the root package.json file."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash 16 title="Project Directory" subtitle="Go back to the root package.json file."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 16 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add the Babel preset and Rollup config to the root level dev deps so we know they'll be available for yarn scripts. Make sure the versions are the same as the version in the packages or they won't symlink."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+## Give yourself a pat on the back, just about there!
+
+![pat on the back](https://media.giphy.com/media/9Q249Qsl5cfLi/giphy.gif)
+
+Time to add a project!
+
+---
+
+<CodeSurfer>
+
+```json title="A client projects's package.json"
+{
+
+}
+```
+
+```json title="A client projects's package.json" subtitle="Can start at any version, long as you're consistent. Normally either 0.1.0 or 1.0.0."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+}
+```
+
+```json title="A client projects's package.json" subtitle="Shown on package registry's about section."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+}
+```
+
+```json title="A client projects's package.json" subtitle="You may not need an entry point for the app. This varies depending on how you plan to consume/deploy it."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+}
+```
+
+```json title="A client projects's package.json" subtitle="Maintain the same scripts structures as your packages. That way one script from the root repo can run the project and all filtered packages."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+}
+```
+
+```json title="A client projects's package.json" subtitle="Since this will be ran somewhere instead of ingested, your libs are dependencies NOT peer dependencies. They are also locked to be the same version as the peer deps listed."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+  },
+}
+```
+
+```json title="A client projects's package.json" subtitle="Add in the core package we created earlier so we can use it in the project!"
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "@monorepo-starter/core": "^1.0.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+  },
+}
+```
+
+```json title="A client projects's package.json" subtitle="Client project may have extra config to proxy requests to the corresponding server project."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "@monorepo-starter/core": "^1.0.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+  },
+  "proxy": "http://localhost:8080"
+}
+```
+
+```json title="A projects's package.json" subtitle="The same structure holds for a server side project."
+{
+
+}
+```
+
+```json title="A server projects's package.json" subtitle="The same structure holds for a server side project."
+{
+  "name": "@monorepo-starter/fancy-app-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "babel src --out-dir dist/ --ignore '**/*.test.js'",
+    "dev": "onchange -ik 'src/**/*.*' -- yarn start",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+}
+
+```
+
+```json title="A server projects's package.json" subtitle="Servers may also have a start command or extra commands. You can always add extra commands to the scripts long as you don't want Lerna to run them for filtered dependencies."
+{
+  "name": "@monorepo-starter/fancy-app-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "babel src --out-dir dist/ --ignore '**/*.test.js'",
+    "dev": "onchange -ik 'src/**/*.*' -- yarn start",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "start": "yarn build && node dist/server.js",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+}
+
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+```bash 12 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Add in structure for client side app."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Example package.json file for a create react app client."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "@monorepo-starter/core": "^1.0.0",
+    "@monorepo-starter/fancy-app-shared": "^1.0.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "formik": "^2.1.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "proxy": "http://localhost:8080"
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 13:15 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Add in structure for client side app."
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Example package.json file for a Node/Express server."
+{
+  "name": "@monorepo-starter/fancy-app-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "babel src --out-dir dist/ --ignore '**/*.test.js'",
+    "dev": "onchange -ik 'src/**/*.*' -- yarn start",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "start": "yarn build && node dist/server.js",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "@monorepo-starter/fancy-app-shared": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 16:18 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory" subtitle="Add an extra package to share code between the client and server!"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Example package.json file for a shared package."
+{
+  "name": "@monorepo-starter/fancy-app-shared",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "dev": "rollup -c rollup.config.js -w",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "devDependencies": {
+    "@monorepo-starter/rollup-config": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "yup": "^0.28.0"
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 19:21 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash 15 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 44 subtitle="Make sure shared is a dependency of the client."
+{
+  "name": "@monorepo-starter/fancy-app-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "build/index.html",
+  "scripts": {
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "dev": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "eject": "SKIP_PREFLIGHT_CHECK=true react-scripts eject",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "test": "echo 'N/A'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "@monorepo-starter/core": "^1.0.0",
+    "@monorepo-starter/fancy-app-shared": "^1.0.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "formik": "^2.1.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "proxy": "http://localhost:8080"
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash 15 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash 18 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 28 subtitle="Make sure it's in the server too with a matching version."
+ {
+  "name": "@monorepo-starter/fancy-app-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mwood23/react-monorepo-starter#readme",
+  "bugs": {
+    "url": "https://github.com/mwood23/react-monorepo-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwood23/react-monorepo-starter.git"
+  },
+  "license": "MIT",
+  "author": "Marcus Wood <marcus@calderadigital.com>",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "babel src --out-dir dist/ --ignore '**/*.test.js'",
+    "dev": "onchange -ik 'src/**/*.*' -- yarn start",
+    "clean": "run-p clean:*",
+    "clean:build": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "preinstall": "npx use-yarn",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "yarn lint --fix",
+    "start": "yarn build && node dist/server.js",
+    "test": "echo 'N/A'"
+  },
+  "dependencies": {
+    "@monorepo-starter/fancy-app-shared": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+
+```
+
+</Step>
+
+<Step>
+
+```bash title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 28
+ 
+```
+
+</Step>
+
+<Step>
+
+```bash 13[8:19],16[8:19],19[8:19] title="Project Directory" subtitle="That naming here is very important! Naming it this way allows us to glob all of the project packages together and run commands on them. ex yarn lerna:run-deps --scope @monorepo-starter/fancy-app-*"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json 28
+ 
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+## We did it!
+
+![packages](https://i.imgflip.com/pfsbf.jpg)
+
+Now let's use it.
+
+---
+<Layout>
+
+Like I mentioned earlier, Lerna is going to help us manage running commands throughout our monorepo. But first, there's one last bit of configuration and then we're off to the races!
+
+</Layout>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add scripts for commonly used Lerna commands. Check out the docs to get a background on them."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add a build command to build all of the projects and packages"
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn lerna:run-deps build",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add a bootstrap command that will install node_modules, symlink packages, hoist deps, and build packages."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add a clean command and killall node to reset your project in case something goes wrong or upstream changes throw off your locally built packages."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "clean": "run-p clean:*",
+    "clean:build": "lerna run clean:build --parallel",
+    "clean:node_modules": "lerna run clean:node_modules --parallel && rimraf node_modules",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "killallNode": "killall node",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Abstract that into a nice rebootstrap command"
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "clean": "run-p clean:*",
+    "clean:build": "lerna run clean:build --parallel",
+    "clean:node_modules": "lerna run clean:node_modules --parallel && rimraf node_modules",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "killallNode": "killall node",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+    "rebootstrap": "yarn && run-s clean bootstrap killallNode",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add lint and test commands."
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "clean": "run-p clean:*",
+    "clean:build": "lerna run clean:build --parallel",
+    "clean:node_modules": "lerna run clean:node_modules --parallel && rimraf node_modules",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "killallNode": "killall node",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+    "lint": "lerna run lint --parallel",
+    "lint:fix": "lerna run lint:fix --parallel",
+    "rebootstrap": "yarn && run-s clean bootstrap killallNode",
+    "test": "lerna run test -- parallel",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add a release command that will build, version, and deploy your packages to your package registry (NPM, Artifactory, etc)"
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "clean": "run-p clean:*",
+    "clean:build": "lerna run clean:build --parallel",
+    "clean:node_modules": "lerna run clean:node_modules --parallel && rimraf node_modules",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "killallNode": "killall node",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+    "lint": "lerna run lint --parallel",
+    "lint:fix": "lerna run lint:fix --parallel",
+    "rebootstrap": "yarn && run-s clean bootstrap killallNode",
+    "release": "yarn build && yarn lerna publish",
+    "test": "lerna run test -- parallel",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 25 title="Project Directory"
+.
+├── /packages
+    └── /babel-preset
+        ├── /src
+        └── package.json
+    └── /core
+        ├── /src
+        └── package.json
+    └── /rollup-config
+        ├── /src
+        └── package.json
+├── /projects
+    └── /fancy-app-client
+        ├── /src
+        └── package.json
+    └── /fancy-app-server
+        ├── /src
+        └── package.json
+    └── /fancy-app-shared
+        ├── /src
+        └── package.json
+├── .gitignore
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```json subtitle="Add project specific scripts to make running or building a project and all of its associated dependencies one command 🚀"
+ {
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "projects/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn install && yarn build",
+    "build": "yarn lerna:run-deps build",
+    "clean": "run-p clean:*",
+    "clean:build": "lerna run clean:build --parallel",
+    "clean:node_modules": "lerna run clean:node_modules --parallel && rimraf node_modules",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:all": "git add -A && yarn commit",
+    "killallNode": "killall node",
+    "lerna": "lerna",
+    "lerna:run": "lerna run",
+    "lerna:run-deps": "lerna run --include-filtered-dependencies --stream",
+    "lerna:list": "lerna list --long --all",
+    "lerna:diff": "lerna diff",
+    "lerna:change": "lerna changed --long || true",
+    "lint": "lerna run lint --parallel",
+    "lint:fix": "lerna run lint:fix --parallel",
+    "rebootstrap": "yarn && run-s clean bootstrap killallNode",
+    "release": "yarn build && yarn lerna publish",
+    "test": "lerna run test -- parallel",
+    "fancy-app": "yarn lerna:run-deps --scope @monorepo-starter/fancy-app-*",
+    "fancy-app:dev": "run-s 'fancy-app build' 'fancy-app dev --parallel'",
+    "fancy-app:build": "yarn fancy-app build"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@monorepo-starter/babel-preset": "^1.0.0",
+    "@monorepo-starter/rollup-config": "^1.0.0",
+    "commitizen": "^4.0.3",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+}
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurfer>
+
+```bash
+yarn bootstrap
+```
+
+</CodeSurfer>
+
+---
+
+![nothing to see here](https://media.giphy.com/media/voZqawzMMG4Lu/giphy.gif)
+
+---
+
+DEMO
+
+---
+
+## Advantages of publishing everything
+
+<Layout>
+
+- Changelogs are auto-generated
+- Versions are automatically interpreted and bumped throughout the project semantically
 - Packages are versioned making projects able to incrementally adopt breaking changes
 - Clients can be installed as a dep to the server and rolled back/pinned if necessary
+
+</Layout>
 
 --- 
 
 ## Gotchas
+
+<Layout>
 
 - Consistent `package.json` files
 - Consistent dev commands
@@ -1223,20 +3721,51 @@ Ideally, we never have to navigate to a internal package's `package.json`.
 - Adding in testing frameworks can be a challenge
 - Some packages won't work in a hoisted environment, use `nohoist` option
 
+</Layout>
+
 ---
 
 ## Is it worth it?
+
+<Layout>
 
 If you are building a suite of tools that share code monorepos are a **must** long as the development team is bought in.
 
 Conversions are possible, but be aware of downstream impacts in CI, Docker, and testing libs.
 
+</Layout>
+
+---
+
+## Special Thanks
+
+<Layout>
+
+- [Rob Hilgefort](https://twitter.com/rjhilgefort) for helping me make this monorepo structure a reality.
+- [Rodrigo Pombo](https://twitter.com/pomber) for the amazing CodeSurfer lib that made this deck
+- [Daniel Stockman](https://github.com/evocateur) for maintaining Lerna
+- All of the open sourced monorepos [listed on Lerna's page](https://lerna.js.org/#users) to help us piece this thing together.
+
+</Layout>
+
 ---
 
 ### Resources
 
-- Caldera monorepo
-<!-- Link to some articles -->
+<Layout>
+
+- [Source and starter monorepo](https://github.com/mwood23/react-monorepo-starter)
+- [Caldera Monorepo](https://github.com/caldera-digital/platform)
+- [Lerna Docs](https://github.com/lerna/lerna)
+
+</Layout>
+
+---
+
+## Shameless Plugs
+
+- Please check out my latest project, [Alcamine](https://alcamine.com/)
+- Follow me on twitter [@mwood230](https://twitter.com/Mwood230)
 
 ---
 
