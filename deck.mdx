@@ -95,6 +95,7 @@ Monorepos are a way to bring together a collection of code repositories into a c
 
 <li>Intimidating</li>
 <li>Continuous Integration Woes</li>
+<li>Docker Woes</li>
 <li>Bootstrapping</li>
 <li>Development velocity</li>
   
@@ -104,9 +105,7 @@ Monorepos are a way to bring together a collection of code repositories into a c
 
 ---
 
-![monorepo life](https://pbs.twimg.com/media/B4XcYicCIAA5SLl?format=png)
-<span style={{fontSize: '1rem', marginTop: '20px'}}>Credit: <a href="https://twitter.com/monorepi/status/542081644954259457?lang=en" target="_blank" rel="nofollow noreferrer">@monorepi
-</a></span>
+<img src="https://pbs.twimg.com/media/B4XcYicCIAA5SLl?format=png" alt="monorepo life" style={{transform: 'scale(1.7)'}} />
 
 ---
 
@@ -367,7 +366,7 @@ git init
 └── package.json
 ```
 
-```json title="Root package.json" subtitle="Dev deps live at the root."
+```json title="Root package.json" subtitle="Dev deps live at the root because that's where you'll be running scripts."
 {
   "name": "monorepo-starter",
   "version": "1.0.0",
@@ -1185,16 +1184,6 @@ Every package or project in a monorepo needs a `package.json` file. They all nee
 
 <Layout>
 
-## Linking Packages Together
-
-Code reuse is the biggest benefit of a monorepo. We are letting Yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, Yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
-
-</Layout>
-
----
-
-<Layout>
-
 ## How this will work
 
 Lerna does a lot more than handle versioning and publishing for us. It also runs commands per package using a package graph under the hood. That means we can create commands from the root package.json that are ran in filtered packages.
@@ -1205,7 +1194,7 @@ Ideally, we never have to navigate to a internal package's `package.json`.
 
 ---
 
-![automated versioning meme](https://img.devrant.com/devrant/rant/r_562197_jDaWU.jpg)
+<img src="https://img.devrant.com/devrant/rant/r_562197_jDaWU.jpg" alt="monorepo life" style={{transform: 'scale(1.7)'}} />
 
 ---
 
@@ -1218,25 +1207,6 @@ Every package we break out will be published to a package registry somewhere. Th
 Since this is on monorepos we'll be adding them but not walking through the code. If you have any questions open an issue on the [starter repo](https://github.com/mwood23/react-monorepo-starter/issues) or catch me after!
 
 </Layout>
-
----
-
-## Semantic Versioning (SEMVER)
-
-<Layout>
-
-A [specification](https://semver.org/) that defines a set of rules for how to handle versioning code. Helps avoid "dependency hell."
-
-1. MAJOR version when you make incompatible API changes,
-2. MINOR version when you add functionality in a backwards compatible manner, and
-3. PATCH version when you make backwards compatible bug fixes.
-
-</Layout>
-
----
-
-![semantic versioning speak it meme](http://quickmeme.com/img/3b/3bf54c64f746befd28698d58a1b31996ba22c14472b8aaf58775cb8e43ae9738.jpg)
-
 
 ---
 
@@ -3847,6 +3817,13 @@ Conversions are possible, but be aware of downstream impacts in CI, Docker, and 
 
 ---
 
+## Shameless Plugs
+
+- Please check out my latest project, [Alcamine](https://alcamine.com/)
+- Follow me on twitter [@mwood230](https://twitter.com/Mwood230)
+
+---
+
 ### Resources
 
 <Layout>
@@ -3859,12 +3836,30 @@ Conversions are possible, but be aware of downstream impacts in CI, Docker, and 
 
 ---
 
-## Shameless Plugs
+## Semantic Versioning (SEMVER)
 
-- Please check out my latest project, [Alcamine](https://alcamine.com/)
-- Follow me on twitter [@mwood230](https://twitter.com/Mwood230)
+<Layout>
+
+A [specification](https://semver.org/) that defines a set of rules for how to handle versioning code. Helps avoid "dependency hell."
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards compatible manner, and
+3. PATCH version when you make backwards compatible bug fixes.
+
+</Layout>
 
 ---
+
+<Layout>
+
+## Linking Packages Together
+
+Code reuse is the biggest benefit of a monorepo. We are letting Yarn handle this for us using workspaces. To do that, we will be installing monorepo packages into other packages. Under the hood, Yarn symlinks them together and hoists the packages and their deps to the root `node_modules` folder.
+
+</Layout>
+
+---
+
 
 # Thank You!
 
