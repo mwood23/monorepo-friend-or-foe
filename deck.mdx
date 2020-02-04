@@ -702,50 +702,6 @@ Linting library that enforces a specific commit convention.
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "commitizen": "^4.0.3",
-    "cz-lerna-changelog": "^2.0.2",
-    "husky": "^4.2.1",
-    "lerna": "^3.20.2"
-  },
-}
-```
-
-</Step>
-
-<Step>
-
-```bash 6 title="Project Directory"
-.
-├── /packages
-├── /projects
-├── lerna.json
-├── LICENSE
-├── package.json
-└── yarn.lock
-```
-
-```json title="package.json" subtitle="Initialize the commitlint configuration."
-{
-  "name": "monorepo-starter",
-  "version": "1.0.0",
-  "private": true,
-  "workspaces": [
-    "packages/*",
-    "projects/*"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "lerna": "lerna"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
@@ -781,11 +737,6 @@ Linting library that enforces a specific commit convention.
   "scripts": {
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -793,7 +744,6 @@ Linting library that enforces a specific commit convention.
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
@@ -832,11 +782,6 @@ Linting library that enforces a specific commit convention.
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -844,7 +789,6 @@ Linting library that enforces a specific commit convention.
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
@@ -883,11 +827,6 @@ Linting library that enforces a specific commit convention.
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -895,7 +834,6 @@ Linting library that enforces a specific commit convention.
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
@@ -917,6 +855,46 @@ Linting library that enforces a specific commit convention.
 .
 ├── /packages
 ├── /projects
+├── commitlint.config.js
+├── lerna.json
+├── LICENSE
+├── package.json
+└── yarn.lock
+```
+
+```js title="package.json" subtitle="Initialize the commitlint configuration."
+module.exports = {
+  rules: {
+    'type-enum': [
+      2,
+      'always',
+      [
+        'build',
+        'chore',
+        'ci',
+        'docs',
+        'feat',
+        'fix',
+        'perf',
+        'refactor',
+        'revert',
+        'style',
+        'test',
+      ],
+    ],
+  },
+}
+```
+
+</Step>
+
+<Step>
+
+```bash 5 title="Project Directory"
+.
+├── /packages
+├── /projects
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -950,10 +928,11 @@ Linting library that enforces a specific commit convention.
 
 <Step>
 
-```bash 4 title="Project Directory"
+```bash 5 title="Project Directory"
 .
 ├── /packages
 ├── /projects
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -993,6 +972,7 @@ Linting library that enforces a specific commit convention.
 ├── /packages
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1013,6 +993,7 @@ Linting library that enforces a specific commit convention.
 ├── /packages
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1040,6 +1021,7 @@ projects/*/build
 ├── /packages
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1590,6 +1572,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
 ├── /packages
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1610,6 +1593,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
     └── /babel-preset
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1631,6 +1615,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1694,6 +1679,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1719,6 +1705,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1747,6 +1734,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1802,7 +1790,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
 
 <Step>
 
-```bash 16 title="Project Directory" subtitle="Go back to the root package.json file."
+```bash 17 title="Project Directory" subtitle="Go back to the root package.json file."
 .
 ├── /packages
     └── /babel-preset
@@ -1816,6 +1804,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1830,7 +1819,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
 
 <Step>
 
-```bash 16 title="Project Directory" subtitle="Go back to the root package.json file."
+```bash 17 title="Project Directory" subtitle="Go back to the root package.json file."
 .
 ├── /packages
     └── /babel-preset
@@ -1844,6 +1833,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1866,11 +1856,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -1878,7 +1863,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
     "cz-lerna-changelog": "^2.0.2",
     "husky": "^4.2.1",
@@ -1896,7 +1880,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
 
 <Step>
 
-```bash 16 title="Project Directory"
+```bash 17 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -1910,6 +1894,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -1932,11 +1917,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -1944,7 +1924,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -1964,7 +1943,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
 
 <Step>
 
-```bash 16 title="Project Directory"
+```bash 17 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -1978,6 +1957,7 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2000,11 +1980,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -2012,7 +1987,6 @@ A [specification](https://semver.org/) that defines a set of rules for how to ha
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -2326,6 +2300,7 @@ Time to add a project!
         └── package.json
 ├── /projects
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2357,6 +2332,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2446,6 +2422,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2480,6 +2457,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2549,6 +2527,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2586,6 +2565,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2658,6 +2638,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2695,6 +2676,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2790,6 +2772,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2827,6 +2810,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2899,6 +2883,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2936,6 +2921,7 @@ Time to add a project!
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -2971,7 +2957,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -2994,6 +2980,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3016,11 +3003,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "commit:all": "git add -A && yarn commit",
     "lerna": "lerna"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3028,7 +3010,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3050,7 +3031,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3073,6 +3054,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3100,11 +3082,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "lerna:diff": "lerna diff",
     "lerna:change": "lerna changed --long || true",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3112,7 +3089,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3134,7 +3110,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3157,6 +3133,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3185,11 +3162,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "lerna:diff": "lerna diff",
     "lerna:change": "lerna changed --long || true",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3197,7 +3169,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3219,7 +3190,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3242,6 +3213,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3271,11 +3243,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "lerna:diff": "lerna diff",
     "lerna:change": "lerna changed --long || true",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3283,7 +3250,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3305,7 +3271,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3328,6 +3294,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3361,11 +3328,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "lerna:diff": "lerna diff",
     "lerna:change": "lerna changed --long || true",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3373,7 +3335,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3395,7 +3356,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3418,6 +3379,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3452,11 +3414,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "lerna:change": "lerna changed --long || true",
     "rebootstrap": "yarn && run-s clean bootstrap killallNode",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3464,7 +3421,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3486,7 +3442,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3509,6 +3465,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3546,11 +3503,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "rebootstrap": "yarn && run-s clean bootstrap killallNode",
     "test": "lerna run test -- parallel",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3558,7 +3510,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3580,7 +3531,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3603,6 +3554,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3641,11 +3593,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "release": "yarn build && yarn lerna publish",
     "test": "lerna run test -- parallel",
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3653,7 +3600,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
@@ -3675,7 +3621,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
 
 <Step>
 
-```bash 25 title="Project Directory"
+```bash 26 title="Project Directory"
 .
 ├── /packages
     └── /babel-preset
@@ -3698,6 +3644,7 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
         ├── /src
         └── package.json
 ├── .gitignore
+├── commitlint.config.js
 ├── lerna.json
 ├── LICENSE
 ├── package.json
@@ -3739,11 +3686,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
     "fancy-app:dev": "run-s 'fancy-app build' 'fancy-app dev --parallel'",
     "fancy-app:build": "yarn fancy-app build"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
@@ -3751,7 +3693,6 @@ Like I mentioned earlier, Lerna is going to help us manage running commands thro
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "@monorepo-starter/babel-preset": "^1.0.0",
     "@monorepo-starter/rollup-config": "^1.0.0",
     "commitizen": "^4.0.3",
